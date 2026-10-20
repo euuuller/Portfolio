@@ -1,10 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import TechBadge from '../components/TechBadge.astro';
 import { projects } from '../data/projects';
 import { site, url } from '../data/site';
 
 const github = site.social.find(({ label }) => label === 'GitHub');
+const link = 'wrap-break-word text-accent underline underline-offset-4 hover:no-underline';
 ---
 
 <BaseLayout title={site.name}>
@@ -14,7 +16,8 @@ const github = site.social.find(({ label }) => label === 'GitHub');
         <h1 id="titulo" class="text-4xl font-bold tracking-tight text-balance sm:text-5xl">{site.name}</h1>
         <p class="mt-3 text-xl font-medium text-accent">{site.jobTitle}</p>
         <p class="mt-6 text-lg text-muted">
-          Apresentação em 2 a 3 frases: o que você constrói, para quem e com qual resultado mensurável.
+          Graduando em Engenharia Elétrica com atuação em Análise e Ciência de Dados. Construo pipelines de dados,
+          modelos preditivos e análises exploratórias com Python, SQL, dbt e Power BI.
         </p>
         <p class="mt-8 flex flex-wrap gap-4">
           <a
@@ -35,13 +38,14 @@ const github = site.social.find(({ label }) => label === 'GitHub');
           }
         </p>
       </div>
-      <!-- Acima da dobra: eager. O LCP medido é a capa do 1º projeto, que recebe fetchpriority. -->
+      <!-- Acima da dobra: eager. O LCP medido é a capa do 1º projeto, que recebe fetchpriority.
+           Monograma provisório: troque pela foto e preencha site.avatarAlt. -->
       <img
         src={url('images/avatar-160.webp')}
         srcset={`${url('images/avatar-160.webp')} 1x, ${url('images/avatar-320.webp')} 2x`}
         width="160"
         height="160"
-        alt={`Foto de ${site.name}`}
+        alt={site.avatarAlt}
         loading="eager"
         decoding="async"
         class="size-32 rounded-full sm:size-40"
@@ -65,23 +69,35 @@ const github = site.social.find(({ label }) => label === 'GitHub');
   <section id="sobre" aria-labelledby="titulo-sobre" class="mx-auto max-w-5xl px-5 py-16">
     <h2 id="titulo-sobre" class="text-2xl font-bold tracking-tight">Sobre</h2>
     <p class="mt-6 max-w-2xl text-lg text-muted">
-      Trajetória profissional, áreas de foco e o que você procura agora (1 parágrafo, até 80 palavras).
+      Combino o rigor analítico, a modelagem matemática e a visão de sistemas da engenharia com dados para transformar
+      informação complexa em <em>insights</em> acionáveis. Meu foco é resolver problemas reais de negócio com estatística
+      aplicada e aprendizado de máquina.
     </p>
+    <h3 class="mt-10 text-lg font-semibold">Ferramentas</h3>
+    <ul class="mt-4 flex max-w-2xl flex-wrap gap-2">
+      {
+        site.skills.map((label) => (
+          <li>
+            <TechBadge label={label} />
+          </li>
+        ))
+      }
+    </ul>
   </section>
 
   <section id="contato" aria-labelledby="titulo-contato" class="mx-auto max-w-5xl px-5 py-16">
     <h2 id="titulo-contato" class="text-2xl font-bold tracking-tight">Contato</h2>
     <p class="mt-6 max-w-2xl text-lg text-muted">
-      O canal mais rápido para propostas e conversas técnicas é o
-      {
-        github ? (
-          <a href={github.href} class="text-accent underline underline-offset-4 hover:no-underline">
-            GitHub
-          </a>
-        ) : (
-          'GitHub'
-        )
-      }.
+      Para propostas, oportunidades e conversas técnicas, escreva para <a href={`mailto:${site.email}`} class={link}
+        >{site.email}</a
+      >.
     </p>
+    {
+      github && (
+        <p class="mt-3 max-w-2xl text-lg text-muted">
+          Código e estudos estão no <a href={github.href} class={link}>GitHub</a>.
+        </p>
+      )
+    }
   </section>
 </BaseLayout>

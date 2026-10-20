@@ -47,7 +47,7 @@ Fluxo: código-fonte → `astro build` (SSG) → `dist/` estático → GitHub Pa
 - **Currículo:** adicione o PDF em `public/docs/` e descomente `resumePath` em `site.ts`. O botão só aparece com o campo preenchido.
 - **Imagem Open Graph:** `public/images/og-image.jpg`, 1200×630, ≤ 150 KB.
 
-As imagens atuais são placeholders. Mantenha nomes e dimensões ao substituí-las: o HTML declara `width` e `height` fixos para evitar CLS.
+O avatar atual é um monograma provisório (com `avatarAlt` vazio, por ser decorativo) e as capas dos projetos são geradas. Mantenha nomes e dimensões ao substituí-los: o HTML declara `width` e `height` fixos para evitar CLS.
 
 Os arquivos em `public/` não recebem hash. Ao trocar uma imagem, o navegador pode servir a versão antiga até o cache expirar (o GitHub Pages usa `max-age=600`). Use um nome novo quando a atualização precisar ser imediata.
 

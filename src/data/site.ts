@@ -8,6 +8,11 @@ export interface SiteConfig {
   name: string;
   jobTitle: string;
   description: string;
+  email: string;
+  /** Texto alternativo do avatar; vazio enquanto ele for só um monograma decorativo. */
+  avatarAlt: string;
+  /** Ferramentas exibidas na seção Sobre. */
+  skills: string[];
   locale: string;
   /** Caminho relativo a `public/`, sem barra inicial. */
   ogImage: string;
@@ -18,14 +23,36 @@ export interface SiteConfig {
 }
 
 export const site: SiteConfig = {
-  name: 'Euller Santos Duarte',
-  jobTitle: 'Desenvolvedor de Software',
+  name: 'Euller dos Santos R. Duarte',
+  jobTitle: 'Análise e Ciência de Dados',
   description:
-    'Portfólio de Euller Santos Duarte: projetos, tecnologias e contato de um desenvolvedor de software.',
+    'Portfólio de Euller dos Santos R. Duarte, graduando em Engenharia Elétrica com foco em Análise e Ciência de Dados: projetos de machine learning, dados e BI.',
+  email: 'Euller.Santos.Duarte@gmail.com',
+  avatarAlt: '',
+  skills: [
+    'Python',
+    'Polars',
+    'Pandas',
+    'NumPy',
+    'Scikit-learn',
+    'Matplotlib',
+    'Jupyter',
+    'Hugging Face',
+    'SQL',
+    'PostgreSQL',
+    'dbt',
+    'Databricks',
+    'BigQuery',
+    'Power BI',
+    'Looker',
+    'Docker',
+    'Git',
+    'Linux',
+  ],
   locale: 'pt_BR',
   ogImage: 'images/og-image.jpg',
-  ogImageAlt: 'Cartão com o texto Portfólio, Desenvolvedor de software',
-  // resumePath: 'docs/curriculo-euller-santos-duarte.pdf',
+  ogImageAlt: 'Euller dos Santos R. Duarte, Análise e Ciência de Dados',
+  // resumePath: 'docs/curriculo-euller-duarte.pdf',
   social: [{ label: 'GitHub', href: 'https://github.com/euuuller' }],
 };
 

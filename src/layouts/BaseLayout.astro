@@ -35,6 +35,7 @@ const personJsonLd = {
   '@type': 'Person',
   name: site.name,
   jobTitle: site.jobTitle,
+  email: site.email,
   url: homeUrl.href,
   image: new URL(url('images/avatar-320.webp'), Astro.site).href,
   sameAs: site.social.map(({ href }) => href),
