@@ -77,7 +77,7 @@ const jsonLd = JSON.stringify(personJsonLd).replace(/</g, '\\u003c');
     <meta name="twitter:image" content={ogImageUrl} />
     <meta name="twitter:image:alt" content={ogImageAlt} />
 
-    <script type="application/ld+json" set:html={jsonLd} />
+    <script is:inline type="application/ld+json" set:html={jsonLd} />
   </head>
   <body class="flex min-h-dvh flex-col">
     <a
