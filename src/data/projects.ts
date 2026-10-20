@@ -13,29 +13,35 @@ export interface Project {
   liveUrl?: string;
 }
 
+// Atividades da disciplina Fundamentos de Machine Learning (IFMA).
+const notebooks = 'https://github.com/euuuller/Fundamentos-ML/blob/main/Notebooks/';
+
 export const projects: Project[] = [
   {
-    title: 'Projeto Exemplo 1',
-    description: 'Descrição curta do problema resolvido e do resultado obtido (1 a 2 frases).',
-    tech: ['TypeScript', 'Astro', 'Tailwind CSS'],
-    image: 'projeto-exemplo-1',
-    imageAlt: 'Captura de tela provisória do Projeto Exemplo 1',
-    repoUrl: 'https://github.com/euuuller',
+    title: 'Câncer de mama: otimização de recall',
+    description:
+      'Classificador de diagnóstico ajustado para priorizar o recall e reduzir falsos negativos. Compara SGD, baseline Dummy e Random Forest.',
+    tech: ['Python', 'Scikit-learn', 'Pandas', 'Jupyter'],
+    image: 'ml-cancer-recall',
+    imageAlt: 'Capa do projeto: classificação binária de câncer de mama com foco em recall',
+    repoUrl: `${notebooks}Exercicio_01_Cancer_Recall.ipynb`,
   },
   {
-    title: 'Projeto Exemplo 2',
-    description: 'Descrição curta do problema resolvido e do resultado obtido (1 a 2 frases).',
-    tech: ['Node.js', 'PostgreSQL'],
-    image: 'projeto-exemplo-2',
-    imageAlt: 'Captura de tela provisória do Projeto Exemplo 2',
-    repoUrl: 'https://github.com/euuuller',
+    title: 'Titanic: previsão de sobrevivência',
+    description:
+      'Pré-processamento e classificação binária de passageiros, avaliada por curva ROC e AUC. Compara SGD, baseline Dummy e Random Forest.',
+    tech: ['Python', 'Scikit-learn', 'Pandas', 'Matplotlib'],
+    image: 'ml-titanic-sobrevivencia',
+    imageAlt: 'Capa do projeto: previsão de sobrevivência no Titanic com ROC e AUC',
+    repoUrl: `${notebooks}Exercicio_02_Titanic_Sobrevivencia.ipynb`,
   },
   {
-    title: 'Projeto Exemplo 3',
-    description: 'Descrição curta do problema resolvido e do resultado obtido (1 a 2 frases).',
-    tech: ['Python', 'Docker'],
-    image: 'projeto-exemplo-3',
-    imageAlt: 'Captura de tela provisória do Projeto Exemplo 3',
-    repoUrl: 'https://github.com/euuuller',
+    title: 'Vinhos: classificação multiclasse',
+    description:
+      'Classificação de três classes de vinho com estratégias OvR e OvO, SVC e Random Forest, avaliadas por métricas macro.',
+    tech: ['Python', 'Scikit-learn', 'NumPy', 'Matplotlib'],
+    image: 'ml-vinhos-multiclasse',
+    imageAlt: 'Capa do projeto: classificação multiclasse de vinhos',
+    repoUrl: `${notebooks}Exercicio_03_Wine_Multiclasse.ipynb`,
   },
 ];
