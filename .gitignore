@@ -15,6 +15,7 @@ npm-debug.log*
 # Lighthouse CI
 .lighthouseci/
 .lhci-site/
+lighthouse-reports/
 
 # sistema/editor
 .DS_Store

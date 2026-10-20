@@ -52,7 +52,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: lighthouse
-          path: .lighthouseci/
+          path: lighthouse-reports/
           retention-days: 14
 
       - name: Publicar artefato do Pages
