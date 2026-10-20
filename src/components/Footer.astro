@@ -1,0 +1,25 @@
+---
+// Rodapé. Estático (0 JS). O ano é fixado no build.
+import { site } from '../data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-border">
+  <div
+    class="mx-auto flex max-w-5xl flex-col gap-3 px-5 py-8 text-sm text-muted sm:flex-row sm:items-center sm:justify-between"
+  >
+    <p>© {year} {site.name}</p>
+    <ul class="flex gap-5" aria-label="Redes sociais">
+      {
+        site.social.map(({ label, href }) => (
+          <li>
+            <a href={href} class="hover:text-fg">
+              {label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</footer>

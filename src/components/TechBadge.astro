@@ -1,0 +1,12 @@
+---
+// Rótulo de tecnologia. Estático (0 JS). Quem usa decide a lista (<ul>/<li>).
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
+---
+
+<span class="inline-block rounded-full border border-border px-2.5 py-0.5 text-xs font-medium text-muted">
+  {label}
+</span>

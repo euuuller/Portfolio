@@ -1,0 +1,66 @@
+---
+// Card de projeto. Estático (0 JS). Imagem responsiva servida de public/images.
+import TechBadge from './TechBadge.astro';
+import type { Project } from '../data/projects';
+import { url } from '../data/site';
+
+interface Props extends Project {
+  /** Nível do título; 3 quando o card fica sob um <h2> de seção. */
+  headingLevel?: 2 | 3;
+  /** `eager` só se o card aparecer acima da dobra (candidato a LCP). */
+  loading?: 'lazy' | 'eager';
+}
+
+const {
+  title,
+  description,
+  tech,
+  image,
+  imageAlt,
+  repoUrl,
+  liveUrl,
+  headingLevel = 3,
+  loading = 'lazy',
+} = Astro.props;
+
+const Heading = `h${headingLevel}` as 'h2' | 'h3';
+const src640 = url(`images/${image}-640.webp`);
+const src1280 = url(`images/${image}-1280.webp`);
+---
+
+<article class="flex flex-col overflow-hidden rounded-xl border border-border bg-surface">
+  <img
+    src={src640}
+    srcset={`${src640} 640w, ${src1280} 1280w`}
+    sizes="(min-width: 1024px) 310px, (min-width: 640px) calc(50vw - 2.5rem), calc(100vw - 2.5rem)"
+    width="640"
+    height="400"
+    alt={imageAlt}
+    loading={loading}
+    decoding="async"
+    class="aspect-[16/10] h-auto w-full object-cover"
+  />
+  <div class="flex flex-1 flex-col gap-3 p-5">
+    <Heading class="text-lg font-semibold">{title}</Heading>
+    <p class="text-sm text-muted">{description}</p>
+    <ul class="flex flex-wrap gap-2" aria-label="Tecnologias">
+      {tech.map((label) => <li><TechBadge label={label} /></li>)}
+    </ul>
+    {
+      (repoUrl || liveUrl) && (
+        <p class="mt-auto flex gap-4 pt-2 text-sm font-medium">
+          {repoUrl && (
+            <a href={repoUrl} class="text-accent underline underline-offset-4 hover:no-underline">
+              Código<span class="sr-only"> de {title}</span>
+            </a>
+          )}
+          {liveUrl && (
+            <a href={liveUrl} class="text-accent underline underline-offset-4 hover:no-underline">
+              Demonstração<span class="sr-only"> de {title}</span>
+            </a>
+          )}
+        </p>
+      )
+    }
+  </div>
+</article>

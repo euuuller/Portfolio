@@ -1,0 +1,31 @@
+---
+// Cabeçalho e navegação principal. Estático (0 JS): sem menu hambúrguer;
+// três links curtos cabem em 320 px de largura.
+import { site, url } from '../data/site';
+
+const links = [
+  { label: 'Projetos', href: url('#projetos') },
+  { label: 'Sobre', href: url('#sobre') },
+  { label: 'Contato', href: url('#contato') },
+];
+---
+
+<header class="border-b border-border">
+  <nav
+    aria-label="Principal"
+    class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-5 py-4"
+  >
+    <a href={url()} class="font-semibold">{site.name}</a>
+    <ul class="flex gap-5 text-sm font-medium">
+      {
+        links.map(({ label, href }) => (
+          <li>
+            <a href={href} class="text-muted hover:text-fg">
+              {label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>
