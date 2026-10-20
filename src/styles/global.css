@@ -1,0 +1,87 @@
+/*
+ * Único CSS de entrada do site. Importado apenas por BaseLayout.astro.
+ * Tailwind v4 (CSS-first): os tokens do design system vivem em @theme.
+ * Proibido: @import de CSS/fontes externas (cada um vira requisição render-blocking).
+ */
+@import "tailwindcss";
+
+/* Fonte auto-hospedada: só o subset latino (cobre pt-BR), eixo de peso variável. */
+@font-face {
+  font-family: "Inter Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("@fontsource-variable/inter/files/inter-latin-wght-normal.woff2") format("woff2-variations");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+    U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Fallback com métricas aproximadas às da Inter: reduz o deslocamento na troca (CLS). */
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial");
+  size-adjust: 107%;
+  ascent-override: 90%;
+  descent-override: 22.4%;
+  line-gap-override: 0%;
+}
+
+/*
+ * Tokens. Pares texto/fundo com contraste >= 4,5:1 (WCAG AA) nos dois temas:
+ * fg 17,7:1 · muted 7,0:1 · accent 6,1:1 (pior caso, sobre surface no tema claro).
+ * `border` é decorativo; nenhum componente depende só dele para ser identificado.
+ */
+@theme {
+  --font-sans: "Inter Variable", "Inter Fallback", ui-sans-serif, system-ui, sans-serif;
+
+  --color-canvas: #ffffff;
+  --color-surface: #f4f4f5;
+  --color-fg: #18181b;
+  --color-muted: #52525b;
+  --color-accent: #1d4ed8;
+  --color-accent-fg: #ffffff;
+  --color-border: #d4d4d8;
+}
+
+/* Tema escuro sem JS e sem FOUC: decidido pelo navegador antes do primeiro paint. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-canvas: #0b0b0f;
+    --color-surface: #18181b;
+    --color-fg: #f4f4f5;
+    --color-muted: #a1a1aa;
+    --color-accent: #93c5fd;
+    --color-accent-fg: #0b0b0f;
+    --color-border: #27272a;
+  }
+}
+
+@layer base {
+  :root {
+    color-scheme: light dark;
+  }
+
+  html {
+    @apply bg-canvas font-sans text-fg antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
