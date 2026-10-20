@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { projects } from '../data/projects';
+import { site, url } from '../data/site';
+
+const github = site.social.find(({ label }) => label === 'GitHub');
+---
+
+<BaseLayout title={site.name}>
+  <section aria-labelledby="titulo" class="mx-auto max-w-5xl px-5 py-16 sm:py-24">
+    <div class="flex flex-col-reverse gap-8 sm:flex-row sm:items-center sm:justify-between">
+      <div class="max-w-2xl">
+        <h1 id="titulo" class="text-4xl font-bold tracking-tight text-balance sm:text-5xl">{site.name}</h1>
+        <p class="mt-3 text-xl font-medium text-accent">{site.jobTitle}</p>
+        <p class="mt-6 text-lg text-muted">
+          Apresentação em 2 a 3 frases: o que você constrói, para quem e com qual resultado mensurável.
+        </p>
+        <p class="mt-8 flex flex-wrap gap-4">
+          <a
+            href="#projetos"
+            class="rounded-lg bg-accent px-5 py-3 font-medium text-accent-fg hover:opacity-90"
+          >
+            Ver projetos
+          </a>
+          {
+            site.resumePath && (
+              <a
+                href={url(site.resumePath)}
+                class="rounded-lg border border-border px-5 py-3 font-medium hover:bg-surface"
+              >
+                Baixar currículo <span class="text-muted">(PDF)</span>
+              </a>
+            )
+          }
+        </p>
+      </div>
+      <!-- Acima da dobra: candidato a LCP, carregamento prioritário. -->
+      <img
+        src={url('images/avatar-160.webp')}
+        srcset={`${url('images/avatar-160.webp')} 1x, ${url('images/avatar-320.webp')} 2x`}
+        width="160"
+        height="160"
+        alt={`Foto de ${site.name}`}
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+        class="size-32 rounded-full sm:size-40"
+      />
+    </div>
+  </section>
+
+  <section id="projetos" aria-labelledby="titulo-projetos" class="mx-auto max-w-5xl px-5 py-16">
+    <h2 id="titulo-projetos" class="text-2xl font-bold tracking-tight">Projetos</h2>
+    <ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        projects.map((project) => (
+          <li class="flex">
+            <ProjectCard {...project} />
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section id="sobre" aria-labelledby="titulo-sobre" class="mx-auto max-w-5xl px-5 py-16">
+    <h2 id="titulo-sobre" class="text-2xl font-bold tracking-tight">Sobre</h2>
+    <p class="mt-6 max-w-2xl text-lg text-muted">
+      Trajetória profissional, áreas de foco e o que você procura agora (1 parágrafo, até 80 palavras).
+    </p>
+  </section>
+
+  <section id="contato" aria-labelledby="titulo-contato" class="mx-auto max-w-5xl px-5 py-16">
+    <h2 id="titulo-contato" class="text-2xl font-bold tracking-tight">Contato</h2>
+    <p class="mt-6 max-w-2xl text-lg text-muted">
+      O canal mais rápido para propostas e conversas técnicas é o
+      {
+        github ? (
+          <a href={github.href} class="text-accent underline underline-offset-4 hover:no-underline">
+            GitHub
+          </a>
+        ) : (
+          'GitHub'
+        )
+      }.
+    </p>
+  </section>
+</BaseLayout>
