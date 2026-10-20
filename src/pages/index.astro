@@ -35,7 +35,7 @@ const github = site.social.find(({ label }) => label === 'GitHub');
           }
         </p>
       </div>
-      <!-- Acima da dobra: candidato a LCP, carregamento prioritário. -->
+      <!-- Acima da dobra: eager. O LCP medido é a capa do 1º projeto, que recebe fetchpriority. -->
       <img
         src={url('images/avatar-160.webp')}
         srcset={`${url('images/avatar-160.webp')} 1x, ${url('images/avatar-320.webp')} 2x`}
@@ -43,7 +43,6 @@ const github = site.social.find(({ label }) => label === 'GitHub');
         height="160"
         alt={`Foto de ${site.name}`}
         loading="eager"
-        fetchpriority="high"
         decoding="async"
         class="size-32 rounded-full sm:size-40"
       />
@@ -54,9 +53,9 @@ const github = site.social.find(({ label }) => label === 'GitHub');
     <h2 id="titulo-projetos" class="text-2xl font-bold tracking-tight">Projetos</h2>
     <ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {
-        projects.map((project) => (
+        projects.map((project, index) => (
           <li class="flex">
-            <ProjectCard {...project} />
+            <ProjectCard {...project} priority={index === 0} />
           </li>
         ))
       }

@@ -7,8 +7,11 @@ import { url } from '../data/site';
 interface Props extends Project {
   /** Nível do título; 3 quando o card fica sob um <h2> de seção. */
   headingLevel?: 2 | 3;
-  /** `eager` só se o card aparecer acima da dobra (candidato a LCP). */
-  loading?: 'lazy' | 'eager';
+  /**
+   * `true` só para o card que aparece na primeira dobra (candidato a LCP):
+   * troca lazy loading por `eager` + `fetchpriority="high"`.
+   */
+  priority?: boolean;
 }
 
 const {
@@ -20,7 +23,7 @@ const {
   repoUrl,
   liveUrl,
   headingLevel = 3,
-  loading = 'lazy',
+  priority = false,
 } = Astro.props;
 
 const Heading = `h${headingLevel}` as 'h2' | 'h3';
@@ -36,7 +39,8 @@ const src1280 = url(`images/${image}-1280.webp`);
     width="640"
     height="400"
     alt={imageAlt}
-    loading={loading}
+    loading={priority ? 'eager' : 'lazy'}
+    fetchpriority={priority ? 'high' : undefined}
     decoding="async"
     class="aspect-[16/10] h-auto w-full object-cover"
   />
